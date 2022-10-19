@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7vh;
+    background-color: black;
+}
+
+.header span {
+    font-weight: 500;
+    color: yellow;
+}

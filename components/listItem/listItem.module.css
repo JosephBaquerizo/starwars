@@ -1,0 +1,14 @@
+.listItem {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    padding: 5px;
+    border: 1px solid black;
+    margin: 5px;
+    background-color: white;
+}
+
+.listItem:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

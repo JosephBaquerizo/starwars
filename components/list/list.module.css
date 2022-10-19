@@ -1,0 +1,28 @@
+.infoContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.block {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: 5px;
+}
