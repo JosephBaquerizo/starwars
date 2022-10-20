@@ -7,6 +7,7 @@ import Header from '../components/header/header';
 import Search from '../components/search/search';
 import List from '../components/list/list';
 import Display from '../components/display/display';
+import Loading from '../components/loading/loading';
 
 export default function Home() {
 
@@ -16,10 +17,13 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const submitName = (e) => {
-    if (e.key !== 'ENTER') return;
-    const filteredPeople = people.filter(people => people.name === e.target.value);
-    setPeople(filteredPeople);
+  const submitName = async (e) => {
+    if (e.key !== 'Enter') return;
+    setLoading(true);
+    const response = await fetch(`https://swapi.dev/api/people/?search=${search}`);
+    const json = await response.json();
+    setPeople(json.results);
+    setLoading(false);
   }
 
   const handleCharacter = (name) => {
@@ -33,7 +37,7 @@ export default function Home() {
 
     const getPeople = async () => {
       setLoading(true);
-      const response = await fetch(`https://swapi.dev/api/people/`);
+      const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
       const json = await response.json();
       return json.results;
     };
@@ -44,7 +48,7 @@ export default function Home() {
       setLoading(false);
     });
 
-  }, [])
+  }, [page])
 
   return (
     <div className={styles.container}>
@@ -60,8 +64,10 @@ export default function Home() {
         {
           people && <List people={people} character={character} handleCharacter={handleCharacter} />
         }
-        <Display />
+        <Display page={page} setPage={setPage}/>
       </div>
+
+      <Loading loading={loading} />
 
     </div>
   )
